@@ -5,10 +5,9 @@ import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 import 'providers/expense_provider.dart';
-//
-// import 'screens/login_screen.dart';
+import 'screens/login_screen.dart';
 // import 'screens/home_screen.dart';
-// import 'screens/signup_screen.dart';
+ import 'screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-      //  ChangeNotifierProvider(create: (_) => AuthProvider()),
+       //ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => ExpenseProvider()),
       ],
       child: MaterialApp(
@@ -39,9 +38,9 @@ class MyApp extends StatelessWidget {
         ),
       //  home: const LoginScreen(),
         routes: {
-          // '/home': (context) => const HomeScreen(),
-          // '/login': (context) => const LoginScreen(),
-          // '/signup': (context) => const SignupScreen(),
+        //  '/home': (context) => const HomeScreen(),
+          //'/login': (context) => const LoginScreen(),
+         // '/signup': (context) => const SignupScreen(),
         },
       ),
     );
