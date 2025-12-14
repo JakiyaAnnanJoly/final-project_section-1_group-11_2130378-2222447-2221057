@@ -41,7 +41,7 @@ import 'package:provider/provider.dart';
 //             return ExpenseProvider();
 //           },
 //
-//           update: (context, authProvider, existingExpenseProvider) {
+//           update: (context,authProvider,existingExpenseProvider) {
 //             final String newUid = authProvider.currentUser?.uid ?? '';
 //
 //             if (existingExpenseProvider == null) {
