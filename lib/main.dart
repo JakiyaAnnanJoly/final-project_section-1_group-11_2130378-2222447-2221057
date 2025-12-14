@@ -1,23 +1,21 @@
-import 'package:flutter/material.dart';
+import 'package:expense_calculator_demo/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'providers/auth_provider.dart';
 import 'providers/expense_provider.dart';
-//
-// import 'screens/login_screen.dart';
-// import 'screens/home_screen.dart';
-// import 'screens/signup_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
+import 'firebase_options.dart';
 
-void main() async {
+
+void main () async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(const MyApp());
 }
 
@@ -28,22 +26,62 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-      //  ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => ExpenseProvider()),
+
+        ChangeNotifierProvider<AuthProvider>(
+          create: (_) => AuthProvider(),
+        ),
+
+        ChangeNotifierProxyProvider<AuthProvider, ExpenseProvider>(
+          create: (context) {
+            final authProvider = context.read<AuthProvider>();
+
+
+            final String initialUid = authProvider.currentUser?.uid ?? '';
+
+            return ExpenseProvider();
+          },
+
+          update: (context, authProvider, existingExpenseProvider) {
+            final String newUid = authProvider.currentUser?.uid ?? '';
+
+            if (existingExpenseProvider == null) {
+              return ExpenseProvider();
+            }
+
+            existingExpenseProvider.updateUid(newUid);
+
+            return existingExpenseProvider;
+          },
+        ),
       ],
       child: MaterialApp(
-        title: 'Expense Calculator',
+        title: 'Expense Tracker',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
+          primarySwatch: Colors.indigo,
+          useMaterial3: true,
         ),
-      //  home: const LoginScreen(),
-        routes: {
-          // '/home': (context) => const HomeScreen(),
-          // '/login': (context) => const LoginScreen(),
-          // '/signup': (context) => const SignupScreen(),
-        },
+        home: const AuthWrapper(),
       ),
     );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
+    if (authProvider.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    if (authProvider.isAuthenticated) {
+      return const HomeScreen();
+    } else {
+      return const LoginScreen();
+    }
   }
 }
