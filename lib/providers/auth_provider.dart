@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-// import '../models/user_model.dart';
-// import '../services/auth_service.dart';
+import '../models/user_model.dart';
+import '../services/auth_service.dart';
 
 /// Auth Provider for authentication state management
 class AuthProvider with ChangeNotifier {
@@ -55,7 +55,8 @@ class AuthProvider with ChangeNotifier {
         phoneNumber: phoneNumber,
         bio: bio,
         address: address,
-      );
+
+      ) ;
       return true;
     } catch (e) {
       _error = 'Sign up failed: $e';

@@ -10,7 +10,7 @@ class AuthService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // --- Get current user (Synchronous) ---
-   UserModel? getCurrentUser() {
+  UserModel? getCurrentUser() {
     final firebaseUser = _auth.currentUser;
 
     if (firebaseUser != null) {

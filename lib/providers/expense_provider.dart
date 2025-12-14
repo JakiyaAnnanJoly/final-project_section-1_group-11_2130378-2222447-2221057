@@ -70,7 +70,7 @@ class ExpenseProvider with ChangeNotifier {
 
   Future<void> addExpense(Expense expense) async {
     if (_currentUserId.isEmpty) {
-      debugPrint('ERROR: Cannot add expense.User ID is empty.');
+      debugPrint('ERROR: Cannot add expense. User ID is empty.');
       return;
     }
 
