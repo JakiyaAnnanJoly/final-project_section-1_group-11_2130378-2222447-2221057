@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "143923241958",
+    "project_id": "expense-calculator-firebase",
+    "storage_bucket": "expense-calculator-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143923241958:android:55821b863e4b2ae1caec27",
+        "android_client_info": {
+          "package_name": "com.example.expense_calculator_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8FgFXeD_je-SuqpOsKlBMYl2GMlBM1zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
