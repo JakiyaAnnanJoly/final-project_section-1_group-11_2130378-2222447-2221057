@@ -55,7 +55,8 @@ class AuthProvider with ChangeNotifier {
         phoneNumber: phoneNumber,
         bio: bio,
         address: address,
-      );
+
+      ) ;
       return true;
     } catch (e) {
       _error = 'Sign up failed: $e';

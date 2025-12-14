@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Expense Tracker'),
         actions: [
-          // Sort Dropdown
+
           PopupMenuButton<SortType>(
             icon: const Icon(Icons.sort),
             initialValue: expenseProvider.currentSort,
@@ -44,8 +44,8 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
 
-          // Log Out Button
-          IconButton(
+
+          IconButton( // Log Out Button
             icon: const Icon(Icons.logout),
             onPressed: () => _logout(context),
             tooltip: 'Logout',
