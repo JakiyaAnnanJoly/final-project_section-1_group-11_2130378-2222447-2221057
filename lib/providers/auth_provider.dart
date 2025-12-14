@@ -21,6 +21,7 @@
 //     // Listen to auth state changes
 //     _initAuthListener();
 //   }
+
 //
 //   /// Initialize auth state listener
 //   void _initAuthListener() {
