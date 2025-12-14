@@ -10,6 +10,7 @@
 //   bool _isLoading = true; // Set to true initially while checking auth state
 //   String? _error;
 //
+//
 //   // Getters
 //   UserModel? get currentUser => _currentUser;
 //   bool get isLoading => _isLoading;
