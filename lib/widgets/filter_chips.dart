@@ -24,7 +24,7 @@ class FilterChips extends StatelessWidget {
           final isSelected = currentFilter == category;
 
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            padding: const  EdgeInsets.symmetric(horizontal: 4.0),
             child: FilterChip(
               label: Text(category),
               selected: isSelected,

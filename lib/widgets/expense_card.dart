@@ -6,7 +6,7 @@ import '../providers/expense_provider.dart';
 import '../utils/constants.dart';
 import '../screens/add_edit_expense_screen.dart';
 
-class ExpenseCard extends StatelessWidget {
+class ExpenseCard extends  StatelessWidget {
   final Expense expense;
 
   const ExpenseCard({super.key, required this.expense});

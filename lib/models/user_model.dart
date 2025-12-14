@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// --- Helper functions moved out or made static to fix 'Instance members' error ---
-// NOTE: Placing these helper functions outside the class or making them static
-// resolves the error shown in the problem pane.
+
 
 DateTime _parseDateTime(dynamic value) {
   if (value == null) {
@@ -30,7 +28,7 @@ DateTime? _parseOptionalDateTime(dynamic value) {
 
 
 
-/// User model representing a user in Firestore
+
 class UserModel {
   final String uid;
   final String email;
@@ -56,7 +54,7 @@ class UserModel {
     this.lastLoginAt,
   });
 
-  /// Convert UserModel to Firestore Map
+
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
@@ -72,7 +70,7 @@ class UserModel {
     };
   }
 
-  /// Create UserModel from Firestore DocumentSnapshot (FIXED)
+
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map['uid'] as String,
@@ -89,7 +87,7 @@ class UserModel {
     );
   }
 
-  /// Create a copy of UserModel with updated fields
+
   UserModel copyWith({
     String? uid,
     String? email,
@@ -116,6 +114,6 @@ class UserModel {
     );
   }
 
-  /// Get full name
+
   String get fullName => '$firstName $lastName';
 }

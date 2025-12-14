@@ -2,37 +2,35 @@ import 'package:flutter/foundation.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
 
-/// Auth Provider for authentication state management
 class AuthProvider with ChangeNotifier {
   final AuthService _authService = AuthService();
 
   UserModel? _currentUser;
-  bool _isLoading = true; // Set to true initially while checking auth state
+  bool _isLoading = true;
   String? _error;
 
-  // Getters
   UserModel? get currentUser => _currentUser;
   bool get isLoading => _isLoading;
   String? get error => _error;
   bool get isAuthenticated => _currentUser != null;
 
   AuthProvider() {
-    // Listen to auth state changes
+
     _initAuthListener();
   }
 
-  /// Initialize auth state listener
+
   void _initAuthListener() {
 
     _authService.authStateChanges.listen((user) {
       _currentUser = user;
-      _isLoading = false; // Auth state determined, stop loading
+      _isLoading = false;
       notifyListeners();
       print('Auth State Updated: User -> ${user?.displayName}');
     });
   }
 
-  /// Sign up a new user
+
   Future<bool> signUp({
     required String email,
     required String password,
@@ -67,7 +65,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /// Sign in existing user
   Future<bool> signIn({
     required String email,
     required String password,
@@ -88,7 +85,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /// Sign out current user
   Future<void> signOut() async {
     _isLoading = true;
     _error = null;
@@ -105,7 +101,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /// Update user profile
   Future<bool> updateProfile(UserModel user) async {
     _isLoading = true;
     _error = null;
@@ -124,7 +119,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /// Send password reset email
   Future<bool> sendPasswordResetEmail(String email) async {
     _isLoading = true;
     _error = null;
@@ -142,7 +136,6 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  /// Clear error
   void clearError() {
     _error = null;
     notifyListeners();

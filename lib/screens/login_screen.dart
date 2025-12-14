@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
-import 'signup_screen.dart'; // Signup screen
+import 'signup_screen.dart';
 
-/// Login Screen
-///
-/// Screen for user authentication
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -30,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       final authProvider = context.read<AuthProvider>();
 
-      // Clear previous error message
       authProvider.clearError();
 
       final success = await authProvider.signIn(
@@ -41,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       if (!success) {
-        // Only show Snackbar if login failed
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(authProvider.error ?? 'Login failed. Please try again.'),
@@ -49,12 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         );
       }
-      // Note: If success, navigation is handled by AuthWrapper (listening to the provider)
     }
   }
 
   Future<void> _handleForgotPassword() async {
-    // 1. Validate email field before sending reset email
     if (_emailController.text.trim().isEmpty || !_emailController.text.contains('@')) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -66,7 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final authProvider = context.read<AuthProvider>();
 
-    // Clear previous error message
     authProvider.clearError();
 
     final success = await authProvider.sendPasswordResetEmail(
@@ -105,7 +97,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Logo/Icon (Using a generic app icon, adjust if needed)
                   Icon(
                     Icons.account_balance_wallet_outlined,
                     size: 80,
@@ -115,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // Title
                   Text(
-                    'Expense Tracker', // Changed from Smart Notes
+                    'Expense Tracker',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -123,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Sign in to manage your expenses', // Updated message
+                    'Sign in to manage your expenses',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.grey[600],
                     ),
@@ -131,7 +122,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 32),
 
-                  // Email Field
                   TextFormField(
                     controller: _emailController,
                     decoration: const InputDecoration(
@@ -154,7 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Password Field
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -190,7 +179,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
 
-                  // Forgot Password
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -200,7 +188,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Login Button
                   Consumer<AuthProvider>(
                     builder: (context, authProvider, child) {
                       return ElevatedButton(
@@ -228,7 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Sign Up Link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

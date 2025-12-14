@@ -1,19 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import '../models/expense.dart';
-// import '../models/expense_model.dart';
 
 class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 
-  // --- Helper Function: Get the correct subcollection path ---
   CollectionReference<Map<String, dynamic>> _getExpenseCollection({required String userId}) {
     return _db.collection('users').doc(userId).collection('expenses');
   }
 
 
-  // --- CREATE ---
   Future<void> createExpense(Expense expense) async {
     if (expense.userId.isEmpty) {
       debugPrint('ERROR: Expense model is missing User ID.');
@@ -40,7 +37,6 @@ class FirebaseService {
   }
 
 
-  // --- READ (STREAM) ---
   Stream<List<Expense>> streamExpenses({required String userId}) {
     if (userId.isEmpty) {
       return Stream.value([]);
@@ -59,7 +55,6 @@ class FirebaseService {
   }
 
 
-  // --- UPDATE ---
   Future<void> updateExpense(Expense expense) async {
     if (expense.id == null || expense.userId.isEmpty) return;
 
@@ -78,7 +73,6 @@ class FirebaseService {
   }
 
 
-  // --- DELETE ---
   Future<void> deleteExpense(String expenseId, {required String userId}) async {
     if (userId.isEmpty) return;
 

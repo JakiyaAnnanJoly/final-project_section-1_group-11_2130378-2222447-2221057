@@ -49,7 +49,7 @@ class SummaryScreen extends StatelessWidget {
               leading: Icon(Icons.circle, color: color, size: 12),
               title: Text(
                 category,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const  TextStyle(fontWeight: FontWeight.bold),
               ),
               trailing: Text(
                 '₹${total.toStringAsFixed(2)} (${percentage.toStringAsFixed(1)}%)',

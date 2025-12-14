@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
           useMaterial3: true,
         ),
-        home: const AuthWrapper(),
+        home: const  AuthWrapper(),
       ),
     );
   }

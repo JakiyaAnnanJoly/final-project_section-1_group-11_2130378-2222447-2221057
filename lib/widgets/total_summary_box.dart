@@ -7,7 +7,6 @@ class TotalSummaryBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Listen to changes in ExpenseProvider
     final total = Provider.of<ExpenseProvider>(context).getTotalExpense();
 
     return Container(

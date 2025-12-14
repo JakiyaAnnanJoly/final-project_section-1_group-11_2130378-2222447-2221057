@@ -9,13 +9,11 @@ const List<String> DEFAULT_CATEGORIES = [
   'Other',
 ];
 
-// Enum for sorting options
 enum SortType {
-  date_desc, // Newest first (Default)
-  amount_desc, // Highest amount first
+  date_desc,
+  amount_desc,
 }
 
-// Map categories to colors for better UI
 const Map<String, Color> CATEGORY_COLORS = {
   'Food': Colors.red,
   'Transport': Colors.blue,

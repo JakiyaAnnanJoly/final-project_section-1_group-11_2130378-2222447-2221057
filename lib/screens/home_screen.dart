@@ -55,13 +55,10 @@ class HomeScreen extends StatelessWidget {
 
       body: Column(
         children: [
-          // 1. Total Summary
           const TotalSummaryBox(),
 
-          // 2. Category Filter Chips
           const FilterChips(),
 
-          // 3. Search Bar
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: TextField(
@@ -77,7 +74,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          // 4. Expense List
           Expanded(
             child: expenseProvider.isLoading
                 ? const Center(child: CircularProgressIndicator())
@@ -101,7 +97,6 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
 
-      // Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Expenses'),
@@ -110,7 +105,6 @@ class HomeScreen extends StatelessWidget {
         currentIndex: 0,
         onTap: (index) {
           if (index == 1) {
-            // Summary Screen এ নেভিগেট
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const SummaryScreen()),
             );
@@ -118,7 +112,6 @@ class HomeScreen extends StatelessWidget {
         },
       ),
 
-      // Floating Action Button to Add Expense
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(

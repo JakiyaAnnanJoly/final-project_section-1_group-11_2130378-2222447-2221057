@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Expense {
-  final String? id; // Firestore document ID (optional on creation)
+  final String? id;
   final String userId;
   final String name;
   final double amount;
@@ -21,7 +21,7 @@ class Expense {
     required this.createdAt,
   });
 
-  // Convert Expense object to Firestore Map
+
   Map<String, dynamic> toMap() {
     return {
       'userId': userId,
@@ -34,7 +34,7 @@ class Expense {
     };
   }
 
-  // Factory constructor to create Expense object from Firestore Map
+
   factory Expense.fromMap(Map<String, dynamic> map, String documentId) {
     return Expense(
       id: documentId,
@@ -48,7 +48,7 @@ class Expense {
     );
   }
 
-  // Helper method for copying/updating
+
   Expense copyWith({
     String? id,
     String? userId,

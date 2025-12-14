@@ -7,7 +7,7 @@ import '../utils/constants.dart';
 import '../providers/auth_provider.dart';
 
 class AddEditExpenseScreen extends StatefulWidget {
-  final Expense? expense; // Null for Add, Not null for Edit
+  final Expense? expense;
 
   const AddEditExpenseScreen({super.key, this.expense});
 
@@ -35,7 +35,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     _description = isEdit ? widget.expense!.description : '';
   }
 
-  // Function to pick date
   Future<void> _presentDatePicker() async {
     final now = DateTime.now();
     final pickedDate = await showDatePicker(
@@ -51,7 +50,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
     }
   }
 
-  // Function to submit the form (Updated for Auth)
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -72,7 +70,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
 
 
       final newOrUpdatedExpense = Expense(
-        id: widget.expense?.id, // Keep ID for update
+        id: widget.expense?.id,
         userId: userId,
         name: _name,
         amount: _amount,
@@ -82,12 +80,9 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
         createdAt: widget.expense?.createdAt ?? DateTime.now(),
       );
 
-      // Save/Update
       if (widget.expense == null) {
-        // Add new expense
         await expenseProvider.addExpense(newOrUpdatedExpense);
       } else {
-        // Update existing expense
         await expenseProvider.updateExpense(newOrUpdatedExpense);
       }
 
@@ -101,7 +96,6 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
   Widget build(BuildContext context) {
     final isEdit = widget.expense != null;
 
-    // UI Layout
     return Scaffold(
       appBar: AppBar(
         title: Text(isEdit ? 'Edit Expense' : 'Add New Expense'),
@@ -113,7 +107,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. Name Field
+
               TextFormField(
                 initialValue: _name,
                 decoration: const InputDecoration(labelText: 'Name'),
@@ -121,7 +115,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                 onSaved: (value) => _name = value!,
               ),
               const SizedBox(height: 16),
-              // 2. Amount Field
+
               TextFormField(
                 initialValue: _amount == 0.0 ? '' : _amount.toString(),
                 decoration: const InputDecoration(labelText: 'Amount (₹)'),
@@ -135,7 +129,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                 onSaved: (value) => _amount = double.parse(value!),
               ),
               const SizedBox(height: 16),
-              // 3. Date Picker
+
               Row(
                 children: [
                   Expanded(
@@ -151,7 +145,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                 ],
               ),
               const SizedBox(height: 16),
-              // 4. Category Dropdown
+
               DropdownButtonFormField<String>(
                 value: _category,
                 decoration: const InputDecoration(labelText: 'Category'),
@@ -162,7 +156,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                 onSaved: (value) => _category = value!,
               ),
               const SizedBox(height: 16),
-              // 5. Description Field
+
               TextFormField(
                 initialValue: _description,
                 decoration: const InputDecoration(labelText: 'Description (Optional)'),
@@ -171,7 +165,7 @@ class _AddEditExpenseScreenState extends State<AddEditExpenseScreen> {
                 onSaved: (value) => _description = value,
               ),
               const SizedBox(height: 30),
-              // Submit Button
+
               Center(
                 child: ElevatedButton.icon(
                   onPressed: _submitForm,

@@ -4,12 +4,10 @@ import 'package:rxdart/rxdart.dart';
 import 'package:flutter/foundation.dart';
 import '../models/user_model.dart';
 
-/// Authentication Service with Firebase implementation
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // --- Get current user (Synchronous) ---
   UserModel? getCurrentUser() {
     final firebaseUser = _auth.currentUser;
 
@@ -27,7 +25,6 @@ class AuthService {
     return null;
   }
 
-  // --- Stream of authentication state changes ---
   Stream<UserModel?> get authStateChanges {
     return _auth.authStateChanges().switchMap((firebaseUser) {
       if (firebaseUser == null) {
@@ -48,7 +45,6 @@ class AuthService {
     });
   }
 
-  // --- Sign up a new user ---
   Future<UserModel> signUp({
     required String email,
     required String password,
@@ -59,7 +55,6 @@ class AuthService {
     String? address,
   }) async {
     try {
-      // Step 1: Create user with FirebaseAuth
       final userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -70,11 +65,9 @@ class AuthService {
         throw Exception("Firebase user creation failed.");
       }
 
-      // Step 2: Update displayName in FirebaseAuth
       final displayName = '$firstName $lastName';
       await user.updateDisplayName(displayName);
 
-      // Step 3: Create user document in Firestore 'users' collection
       final userModel = UserModel(
         uid: user.uid,
         email: email,
@@ -94,7 +87,6 @@ class AuthService {
 
       await _firestore.collection('users').doc(user.uid).set(userMap);
 
-      // Step 4: Return UserModel
       return userModel.copyWith(
         createdAt: DateTime.now(),
         lastLoginAt: DateTime.now(),
@@ -109,7 +101,6 @@ class AuthService {
     }
   }
 
-  // --- Sign in existing user (OPTIMIZED FOR SPEED) ---
   Future<UserModel> signIn({
     required String email,
     required String password,
@@ -148,18 +139,15 @@ class AuthService {
     }
   }
 
-  // --- Sign out current user ---
   Future<void> signOut() async {
     await _auth.signOut();
   }
 
-  // --- Update user profile ---
   Future<void> updateProfile(UserModel user) async {
     await _firestore.collection('users').doc(user.uid).update(user.toMap());
     await _auth.currentUser?.updateDisplayName(user.displayName);
   }
 
-  // --- Send password reset email ---
   Future<void> sendPasswordResetEmail(String email) async {
     await _auth.sendPasswordResetEmail(email: email);
   }

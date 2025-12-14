@@ -18,7 +18,6 @@ class ExpenseProvider with ChangeNotifier {
 
   String _currentUserId = '';
 
-  // Getters
   List<Expense> get expenses => _applyFiltersAndSort();
   String get currentCategoryFilter => _currentCategoryFilter;
   SortType get currentSort => _currentSort;
@@ -42,7 +41,6 @@ class ExpenseProvider with ChangeNotifier {
     }
   }
 
-  // --- Data Loading and Cleanup ---
   void _loadExpenses() {
     if (_currentUserId.isEmpty) return;
 
@@ -59,14 +57,12 @@ class ExpenseProvider with ChangeNotifier {
     });
   }
 
-  // Dispose method
   @override
   void dispose() {
     _expenseSubscription?.cancel();
     super.dispose();
   }
 
-  // --- CRUD Operations ---
 
   Future<void> addExpense(Expense expense) async {
     if (_currentUserId.isEmpty) {
@@ -131,7 +127,6 @@ class ExpenseProvider with ChangeNotifier {
     return workingList;
   }
 
-  // --- Summary/Calculations ---
 
   double getTotalExpense() {
     return _allExpenses.fold(0.0, (sum, item) => sum + item.amount);

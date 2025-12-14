@@ -41,7 +41,6 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_formKey.currentState!.validate()) {
       final authProvider = context.read<AuthProvider>();
 
-      // Clear previous error message
       authProvider.clearError();
 
       final success = await authProvider.signUp(
@@ -67,7 +66,6 @@ class _SignupScreenState extends State<SignupScreen> {
             backgroundColor: Colors.green,
           ),
         );
-        // If successful, navigate back to Login or Home (AuthWrapper handles Home)
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -94,7 +92,7 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Title
+
                 Text(
                   'Sign Up',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -135,7 +133,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Password Field
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
@@ -285,7 +282,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Bio Field (Optional)
+
                 TextFormField(
                   controller: _bioController,
                   decoration: const InputDecoration(
@@ -301,7 +298,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Address Field (Optional)
+
                 TextFormField(
                   controller: _addressController,
                   decoration: const InputDecoration(
@@ -315,7 +312,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // Sign Up Button
+
                 Consumer<AuthProvider>(
                   builder: (context, authProvider, child) {
                     return ElevatedButton(
@@ -344,7 +341,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Sign In Link
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
