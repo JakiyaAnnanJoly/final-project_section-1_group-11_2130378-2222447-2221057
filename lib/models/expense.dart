@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
 class Expense {
   final String? id; // Firestore document ID (optional on creation)
   final String userId;
@@ -11,7 +9,6 @@ class Expense {
   final String category;
   final String? description;
   final DateTime createdAt;
-
 
   Expense({
     this.id,
